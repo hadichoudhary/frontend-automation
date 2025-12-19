@@ -1,0 +1,50 @@
+.paginationContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+    padding: 16px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.pageBtn {
+    padding: 8px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: white;
+    color: #374151;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 100px;
+}
+
+.pageBtn:hover:not(:disabled) {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+.pageBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pageshow {
+    padding: 8px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: #f9fafb;
+    color: #6b7280;
+    font-weight: 500;
+    min-width: 120px;
+    text-align: center;
+}
+
+/* Add this to your uploads.module.css for the page info */
+.pageInfo {
+    font-size: 14px;
+    color: #6b7280;
+    margin-left: 12px;
+    font-weight: normal;
+}

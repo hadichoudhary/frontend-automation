@@ -1,0 +1,199 @@
+/* ===============================
+   Base Reset
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===============================
+   Page Layout
+================================ */
+.signupBody {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem; /* reduced */
+  background-color: #f1f2f6;
+}
+
+/* ===============================
+   Card
+================================ */
+.signupContainer {
+  width: 100%;
+  max-width: 420px;
+  padding: 1.4rem; /* reduced */
+  border-radius: 0.9rem;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ===============================
+   Header
+================================ */
+.signupText {
+  text-align: center;
+  margin-bottom: 1.2rem; /* reduced */
+}
+
+.signupText h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+  color: #222;
+}
+
+.signupText p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* ===============================
+   Form
+================================ */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* reduced */
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===============================
+   Labels & Inputs
+================================ */
+.inputLabel {
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.input {
+  height: 2.4rem; /* reduced */
+  padding: 0.45rem 0.55rem; /* reduced */
+  border-radius: 0.45rem;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: rgb(56, 56, 255);
+  box-shadow: 0 0 0 2px rgba(56, 56, 255, 0.12);
+}
+
+.inputError {
+  border-color: #e74c3c !important;
+}
+
+/* ===============================
+   Errors
+================================ */
+.errorText {
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: #e74c3c;
+}
+
+.errorMessage {
+  padding: 0.6rem;
+  border-radius: 0.45rem;
+  background-color: #ffeaea;
+  border: 1px solid #ffcccc;
+  color: #c0392b;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* ===============================
+   Password Header
+================================ */
+.passwordHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.togglePassword {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: rgb(56, 56, 255);
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.3rem;
+}
+
+
+
+
+button {
+  height: 2.5rem; /* reduced */
+  border-radius: 0.45rem;
+  border: none;
+  background-color: rgb(56, 56, 255);
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+
+
+button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+
+.spinner {
+  width: 0.95rem;
+  height: 0.95rem;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.footerText {
+  text-align: center;
+  margin-top: 0.8rem; /* reduced */
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.footerText a {
+  color: rgb(56, 56, 255);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+
+@media (max-width: 480px) {
+  .signupContainer {
+    padding: 1.2rem;
+  }
+
+  form {
+    gap: 0.9rem;
+  }
+}

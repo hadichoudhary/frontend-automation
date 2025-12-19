@@ -1,0 +1,256 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+/* ================= LAYOUT ================= */
+.layoutWrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.bodyWrapper {
+  display: flex;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ================= HEADER ================= */
+.headerContainer {
+  height: 64px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: black;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.notification {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.userIcon {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background: #2563eb;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebarContainer {
+  width: 260px;
+  background: #fff;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 101;
+}
+
+.sidebarHeader {
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  flex-shrink: 0;
+}
+
+.sidebarLogoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logoText {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.closeIcon {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.sidebarContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sidebarList {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.sidebarListsItem {
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: #333;
+}
+
+.sidebarListsItem:hover {
+  background: #f1f5f9;
+}
+
+.activeItem {
+  background: #eff6ff;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.logout {
+  padding: 1rem 1rem 1rem 2rem;
+  border-top: 1px solid #ddd;
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+
+.mainContent {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  background: #f9fafb;
+  margin-left: 260px;
+  margin-top: 64px;
+  height: calc(100vh - 64px);
+}
+
+/* ================= OVERLAY ================= */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+  .hamburger {
+    display: block;
+  }
+
+  .sidebarContainer {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    height: 100vh;
+    z-index: 100;
+    transition: 0.3s ease;
+  }
+
+  .sidebarOpen {
+    left: 0;
+  }
+
+  .closeIcon {
+    display: block;
+  }
+  
+  .mainContent {
+    margin-left: 0;
+    margin-top: 64px;
+    width: 100%;
+    height: calc(100vh - 64px);
+  }
+  
+  .headerContainer {
+    position: fixed;
+    width: 100%;
+  }
+  
+  /* Show logo in header on mobile */
+  .headerLeft .logoText {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2563eb;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 1025px) {
+  /* Hide logo in header on desktop */
+  .headerLeft .logoText {
+    display: none;
+  }
+  
+  /* Hide hamburger on desktop */
+  .hamburger {
+    display: none;
+  }
+  
+  /* Hide close icon on desktop */
+  .closeIcon {
+    display: none;
+  }
+  
+  .sidebarContainer {
+    position: fixed;
+    height: 100vh;
+  }
+  
+  .headerContainer {
+    position: fixed;
+    left: 260px;
+    width: calc(100% - 260px);
+  }
+  
+  .overlay {
+    display: none;
+  }
+}
