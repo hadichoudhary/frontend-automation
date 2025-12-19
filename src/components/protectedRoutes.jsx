@@ -14,7 +14,7 @@ const ProtectedRoutes = ({ children }) => {
       }
 
       try {
-        await axios.get("http://localhost:4000/api/check/verify-token", {
+        await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/check/verify-token`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
