@@ -45,7 +45,7 @@ const DashboardPage = () => {
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/platforms/linkedinStatus`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getposts`, {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/getExcelData`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/activity/recent`, {
