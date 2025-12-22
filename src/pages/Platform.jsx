@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PlatformCard from "../components/platformCard";
 import { PLATFORMS } from "../utils/platformsList";
-// import FacebookLogin from "@greatsumini/react-facebook-login";
+import FacebookLogin from "@greatsumini/react-facebook-login";
 import toast from "react-hot-toast";
 import style from "../css/platform.module.css";
 
@@ -14,8 +14,7 @@ const connectLinkedIn = () => {
   }
 
   const safeState = btoa(token);
-  console.log("safestate",safeState);
-  
+
 
   const params = new URLSearchParams({
     response_type: "code",
@@ -52,9 +51,8 @@ const Platforms = () => {
           },
         }
       );
-      
+
       const data = await res.json();
-      console.log("API Response:", data); 
 
       if (!data.success) {
         console.error("API returned error:", data.message);
@@ -76,12 +74,12 @@ const Platforms = () => {
         });
       }
 
-      console.log("Connected Platforms Map:", connectedPlatformsMap); 
+      console.log("Connected Platforms Map:", connectedPlatformsMap);
       setPlatforms(prevPlatforms => {
         const updatedPlatforms = PLATFORMS.map(p => {
           const platformName = p.value.toLowerCase();
           const connectedInfo = connectedPlatformsMap[platformName];
-          
+
           return {
             platform_name: p.value,
             is_connected: connectedInfo ? connectedInfo.isConnected : false,
@@ -89,8 +87,7 @@ const Platforms = () => {
             platform_data: connectedInfo ? connectedInfo.platformData : null
           };
         });
-        
-        console.log("Updated Platforms:", updatedPlatforms); 
+
         return updatedPlatforms;
       });
 
@@ -104,9 +101,9 @@ const Platforms = () => {
 
   useEffect(() => {
     fetchStatus();
-    
+
     const intervalId = setInterval(fetchStatus, 30000);
-    
+
     return () => clearInterval(intervalId);
   }, []);
 
@@ -137,16 +134,15 @@ const Platforms = () => {
       );
 
       const data = await res.json();
-      console.log("Disconnect Response:", data); 
       if (!data.success) {
         throw new Error(data.message || "Disconnect failed");
       }
 
       toast.success(`${platformName} disconnected successfully`);
-      
-      setPlatforms(prevPlatforms => 
-        prevPlatforms.map(p => 
-          p.platform_name === platformName 
+
+      setPlatforms(prevPlatforms =>
+        prevPlatforms.map(p =>
+          p.platform_name === platformName
             ? { ...p, is_connected: false, platform_username: "" }
             : p
         )
@@ -160,54 +156,32 @@ const Platforms = () => {
     }
   };
 
-  // const connectFacebook = async (fbRes) => {
-  //   try {
-  //     const token = localStorage.getItem("authToken");
-  //     if (!token) {
-  //       toast.error("Please login first");
-  //       return;
-  //     }
+  const connectFacebook = () => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      toast.error("Please login first");
+      return;
+    }
 
-  //     const res = await fetch(
-  //       "http://localhost:4000/api/platforms/facebookCallback",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //         body: JSON.stringify({
-  //           accessToken: fbRes.accessToken,
-  //           userID: fbRes.userID,
-  //           expiresIn: fbRes.expiresIn,
-  //         }),
-  //       }
-  //     );
+    const safeState = btoa(token);
 
-  //     const data = await res.json();
-  //     console.log("Facebook Connect Response:", data); 
+    const params = new URLSearchParams({
+      response_type: "code",
+      client_id: import.meta.env.VITE_FACEBOOK_APP_ID,
+      redirect_uri: `${import.meta.env.VITE_BACKEND_URL}/api/platforms/facebookCallback`,
+      scope: [
+        "pages_show_list",
+        "pages_read_engagement",
+        "pages_manage_posts",
+        "pages_read_user_content"
+      ].join(","),
+      state: safeState,
+    });
 
-  //     if (!data.success) {
-  //       throw new Error(data.message || "Facebook connection failed");
-  //     }
+    window.location.href =
+      `https://www.facebook.com/v19.0/dialog/oauth?${params.toString()}`;
+  };
 
-  //     toast.success("Facebook connected successfully");
-      
-  //     setPlatforms(prevPlatforms => 
-  //       prevPlatforms.map(p => 
-  //         p.platform_name === "Facebook" 
-  //           ? { ...p, is_connected: true, platform_username: data.userName || "" }
-  //           : p
-  //       )
-  //     );
-
-  //     setTimeout(fetchStatus, 1000);
-
-  //   } catch (error) {
-  //     console.error("Facebook Connect Error:", error);
-  //     toast.error(`Facebook connection failed: ${error.message}`);
-  //   }
-  // };
 
   if (loading) {
     return (
@@ -240,32 +214,15 @@ const Platforms = () => {
               isConnected={p.is_connected}
               username={p.platform_username}
               onConnect={
-                p.platform_name === "LinkedIn"
-                  ? connectLinkedIn
-                  : undefined
+                p.platform_name === "Facebook"
+                  ? connectFacebook
+                  : p.platform_name === "LinkedIn"
+                    ? connectLinkedIn
+                    : undefined
               }
               onDisconnect={() => disconnect(p.platform_name)}
-            >
-              {/* {p.platform_name === "Facebook" && !p.is_connected && (
-                <FacebookLogin
-                  appId="891510656873524"
-                  onSuccess={connectFacebook}
-                  onFail={(error) => {
-                    console.error("Facebook Login Error:", error);
-                    toast.error("Facebook login failed");
-                  }}
-                  
-                  render={({ onClick }) => (
-                    <button 
-                      onClick={onClick}
-                      className={style.facebookButton}
-                    >
-                      Connect Facebook
-                    </button>
-                  )}
-                />
-              )} */}
-            </PlatformCard>
+            />
+
           );
         })}
       </div>

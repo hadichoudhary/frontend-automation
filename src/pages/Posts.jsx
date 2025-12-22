@@ -27,7 +27,7 @@ const Posts = () => {
         if (!token) return;
 
         const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/getExcelData`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/post/getPosts`,
           {
             method: "GET",
             headers: {
