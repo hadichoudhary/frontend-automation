@@ -71,6 +71,8 @@ const PromptPage = () => {
       );
 
       setResult(res.data.result);
+      console.log(res.data.result);
+      
       toast.success("Prompt generated successfully");
       await fetchSchedules();
       setActiveTab("schedules");
