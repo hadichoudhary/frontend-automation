@@ -13,6 +13,8 @@ import WebLayout from "./pages/WebLayout";
 import { Toaster } from "react-hot-toast";
 import Settings from "./pages/setting";
 import PromptPage from "./pages/PromptPage";
+import PrivacyPolicy from "./pages/privacypolicy";
+import Terms from "./pages/terms&Services";
 
 
 const router = createBrowserRouter([
@@ -37,6 +39,12 @@ const router = createBrowserRouter([
   },
   {
     path: '/signup', element: <Signup />
+  },
+  {
+    path:'/privacy', element:<PrivacyPolicy/>
+  },
+  {
+    path:'/Terms-Services' ,element:<Terms/>
   }
 ])
 
